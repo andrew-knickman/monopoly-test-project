@@ -6,7 +6,6 @@ public class PropertyCell extends Cell {
 	private int numHouses;
 	private int rent;
 	private int sellPrice;
-
 	public String getColorGroup() {
 		return colorGroup;
 	}
