@@ -2,10 +2,18 @@ package edu.towson.cis.cosc442.project1.monopoly;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlayerTest.
+ */
 public class PlayerTest extends TestCase {
 
+	/** The game master. */
 	GameMaster gameMaster;
 	
+	/* (non-Javadoc)
+	 * @see junit.framework.TestCase#setUp()
+	 */
 	protected void setUp() throws Exception {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new SimpleGameBoard());
@@ -14,6 +22,9 @@ public class PlayerTest extends TestCase {
         gameMaster.reset();
 	}
 	
+	/**
+	 * Test purchase property.
+	 */
 	public void testPurchaseProperty() {
 		gameMaster.setNumberOfPlayers(1);
 		gameMaster.movePlayer(0, 3);
@@ -26,6 +37,9 @@ public class PlayerTest extends TestCase {
 		assertSame(player, cell.getTheOwner());
 	}
 
+	/**
+	 * Test same go cell.
+	 */
 	public void testSameGoCell() {
 		GameBoard gameboard = gameMaster.getGameBoard();
 		Player player1 = new Player();
@@ -35,6 +49,9 @@ public class PlayerTest extends TestCase {
 		assertSame(go, player2.getPosition());
 	}
 	
+	/**
+	 * Test pay rent to.
+	 */
 	public void testPayRentTo() {
 		gameMaster.setNumberOfPlayers(2);
 		gameMaster.movePlayer(0,4);
@@ -46,6 +63,9 @@ public class PlayerTest extends TestCase {
 		assertEquals(2800, gameMaster.getPlayer(0).getMoney());
 	}
 	
+	/**
+	 * Test exchange property.
+	 */
 	public void testExchangeProperty() {
 		gameMaster.setNumberOfPlayers(2);
 		gameMaster.movePlayer(0,3);
@@ -55,6 +75,9 @@ public class PlayerTest extends TestCase {
 		assertEquals(1,gameMaster.getCurrentPlayer().getPropertyNumber());
 	}
 	
+	/**
+	 * Test purchase house.
+	 */
 	public void testPurchaseHouse() {
 		gameMaster.setNumberOfPlayers(1);
 		gameMaster.startGame();
@@ -72,6 +95,9 @@ public class PlayerTest extends TestCase {
 		assertEquals(880, gameMaster.getCurrentPlayer().getMoney());
 	}
 	
+	/**
+	 * Test reset property.
+	 */
 	public void testResetProperty() {
 		gameMaster.setNumberOfPlayers(1);
 		gameMaster.movePlayer(0,1);
