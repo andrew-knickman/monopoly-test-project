@@ -5,11 +5,7 @@ import java.util.Hashtable;
 
 public class GameBoard {
 
-	private ArrayList<Cell> cells = new ArrayList<Cell>();
-    private ArrayList<Card> chanceCards = new ArrayList<Card>();
-	//the key of colorGroups is the name of the color group.
-	private Hashtable<String, Integer> colorGroups = new Hashtable<String, Integer>();
-	private ArrayList<Card> communityChestCards = new ArrayList<Card>();
+	private GameBoardData data = new GameBoardData(new ArrayList<Cell>(), new ArrayList<Card>(), new Hashtable<String, Integer>(), new ArrayList<Card>());
 	public GameBoard() {
 		Cell go = new GoCell();
 		addCell(go);
@@ -17,43 +13,43 @@ public class GameBoard {
 
     public void addCard(Card card) {
         if(card.getCardType() == Card.TYPE_CC) {
-            communityChestCards.add(card);
+            data.communityChestCards.add(card);
         } else {
-            chanceCards.add(card);
+            data.chanceCards.add(card);
         }
     }
 	
 	public void addCell(Cell cell) {
-		cells.add(cell);
+		data.cells.add(cell);
 	}
 	
 	public void addCell(PropertyCell cell) {
 		String colorGroup = cell.getColorGroup();
 		int propertyNumber = getPropertyNumberForColor(colorGroup);
-		colorGroups.put(colorGroup, new Integer(propertyNumber + 1));
-        cells.add(cell);
+		data.colorGroups.put(colorGroup, new Integer(propertyNumber + 1));
+        data.cells.add(cell);
 	}
 
     public Card drawCCCard() {
-        Card card = (Card)communityChestCards.get(0);
-        communityChestCards.remove(0);
+        Card card = (Card)data.communityChestCards.get(0);
+        data.communityChestCards.remove(0);
         addCard(card);
         return card;
     }
 
     public Card drawChanceCard() {
-        Card card = (Card)chanceCards.get(0);
-        chanceCards.remove(0);
+        Card card = (Card)data.chanceCards.get(0);
+        data.chanceCards.remove(0);
         addCard(card);
         return card;
     }
 
 	public Cell getCell(int newIndex) {
-		return (Cell)cells.get(newIndex);
+		return (Cell)data.cells.get(newIndex);
 	}
 	
 	public int getCellNumber() {
-		return cells.size();
+		return data.cells.size();
 	}
 	
 	public PropertyCell[] getPropertiesInMonopoly(String color) {
@@ -74,7 +70,7 @@ public class GameBoard {
 	}
 	
 	public int getPropertyNumberForColor(String name) {
-		Integer number = (Integer)colorGroups.get(name);
+		Integer number = (Integer)data.colorGroups.get(name);
 		if(number != null) {
 			return number.intValue();
 		}
@@ -82,8 +78,8 @@ public class GameBoard {
 	}
 
 	public Cell queryCell(String string) {
-		for(int i = 0; i < cells.size(); i++){
-			Cell temp = (Cell)cells.get(i); 
+		for(int i = 0; i < data.cells.size(); i++){
+			Cell temp = (Cell)data.cells.get(i); 
 			if(temp.getName().equals(string)) {
 				return temp;
 			}
@@ -92,8 +88,8 @@ public class GameBoard {
 	}
 	
 	public int queryCellIndex(String string){
-		for(int i = 0; i < cells.size(); i++){
-			Cell temp = (Cell)cells.get(i); 
+		for(int i = 0; i < data.cells.size(); i++){
+			Cell temp = (Cell)data.cells.get(i); 
 			if(temp.getName().equals(string)) {
 				return i;
 			}
@@ -102,6 +98,6 @@ public class GameBoard {
 	}
 
     public void removeCards() {
-        communityChestCards.clear();
+        data.communityChestCards.clear();
     }
 }
