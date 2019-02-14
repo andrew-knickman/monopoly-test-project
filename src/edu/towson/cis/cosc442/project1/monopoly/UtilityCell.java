@@ -22,7 +22,7 @@ public class UtilityCell extends Cell {
 		return 0;
 	}
 
-	public void playAction() {
+	public boolean playAction(String msg) {
 		Player currentPlayer = null;
 		if(!isAvailable()) {
 			currentPlayer = GameMaster.instance().getCurrentPlayer();
@@ -32,5 +32,6 @@ public class UtilityCell extends Cell {
 				currentPlayer.payRentTo(theOwner, getRent(diceRoll));
 			}
 		}
+		return false;
 	}
 }

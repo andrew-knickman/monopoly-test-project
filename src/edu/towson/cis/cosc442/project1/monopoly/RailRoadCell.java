@@ -21,7 +21,7 @@ public class RailRoadCell extends Cell {
 		return RailRoadCell.baseRent * (int)Math.pow(2, theOwner.numberOfRR() - 1);
 	}
 	
-	public void playAction() {
+	public boolean playAction(String msg) {
 		Player currentPlayer = null;
 		if(!isAvailable()) {
 			currentPlayer = GameMaster.instance().getCurrentPlayer();
@@ -29,5 +29,6 @@ public class RailRoadCell extends Cell {
 				currentPlayer.payRentTo(theOwner, getRent());
 			}
 		}
+		return false;
 	}
 }
